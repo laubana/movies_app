@@ -37,7 +37,7 @@ const List = (): JSX.Element => {
   };
 
   const handleEnter = (id: number) => {
-    navigation.navigate("Detail");
+    navigation.navigate("Detail", { type: type, id: id });
   };
 
   useEffect(() => {
