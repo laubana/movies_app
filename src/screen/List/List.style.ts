@@ -5,14 +5,6 @@ const styles = StyleSheet.create({
     padding: 16,
     flex: 1,
   },
-  item: { flexDirection: "row" },
-  itemLeft: { width: 102, marginRight: 16 },
-  itemImage: {
-    aspectRatio: 1,
-    objectFit: "cover",
-  },
-  itemRight: { flex: 1 },
-  itemTitle: { fontWeight: "bold" },
   modal: {
     backgroundColor: "white",
     paddingBottom: 32,

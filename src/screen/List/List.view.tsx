@@ -1,11 +1,21 @@
-import { FlatList, Image, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import { Button } from "react-native-paper";
 import Modal from "react-native-modal";
 import { ListProps } from "./List.props";
 import styles from "./List.style";
+import Select from "../../component/Select";
+import Card from "../../component/Card";
 
 const ListView = (props: ListProps) => {
   const {
+    isLoading,
     isVisible,
     option,
     options,
@@ -18,39 +28,32 @@ const ListView = (props: ListProps) => {
 
   return (
     <View style={styles.container}>
-      <Button mode="contained" onPress={handleOpen} style={{ borderRadius: 8 }}>
-        Open
-      </Button>
-      <FlatList
-        data={items}
-        renderItem={({ item, index }) => (
-          <View style={styles.item} key={index}>
-            <View style={styles.itemLeft}>
-              <Image
-                source={{
-                  uri: `https://image.tmdb.org/t/p/original${item.poster_path}`,
-                }}
-                style={styles.itemImage}
-              />
-            </View>
-            <View style={styles.itemRight}>
-              <Text style={styles.itemTitle}>{item.title || item.name}</Text>
-              <Text>Popularity: {item.popularity}</Text>
-              <Text>Release Date: {item.release_date}</Text>
-              <View style={{ alignSelf: "flex-start" }}>
-                <Button
-                  mode="contained"
-                  style={{ borderRadius: 4 }}
-                  onPress={() => handleEnter(item.id)}
-                >
-                  More Details
-                </Button>
-              </View>
-            </View>
-          </View>
-        )}
-        ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
-      />
+      <Pressable
+        onPress={handleOpen}
+        style={{ alignSelf: "center", width: "50%", marginBottom: 16 }}
+      >
+        <Select label={option?.label} />
+      </Pressable>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="blue" animating />
+      ) : (
+        <FlatList
+          data={items}
+          renderItem={({ item, index }) => (
+            <Card item={item} onEnter={handleEnter} key={index} />
+          )}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                height: 1,
+                borderColor: "lightgrey",
+                borderWidth: 0.5,
+                marginVertical: 8,
+              }}
+            />
+          )}
+        />
+      )}
       <Modal
         testID={"modal"}
         isVisible={isVisible}

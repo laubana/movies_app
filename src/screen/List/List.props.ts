@@ -2,6 +2,7 @@ import { Item } from "../../type/Item";
 import { Option } from "../../type/Options";
 
 export interface ListProps {
+  isLoading: boolean;
   isVisible: boolean;
   option: Option | undefined;
   options: Option[];

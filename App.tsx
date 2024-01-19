@@ -1,11 +1,13 @@
 import "react-native-gesture-handler";
+import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import List from "./src/screen/List";
 import Detail from "./src/screen/Detail";
 import Search from "./src/screen/Search";
-import { SafeAreaView, StatusBar, Text } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -35,7 +37,6 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: "TV Shows",
           tabBarLabelStyle: { textTransform: undefined },
-          tabBarIndicatorStyle: { backgroundColor: "steelblue" },
         }}
         component={List}
         initialParams={{ type: "shows" }}
@@ -55,7 +56,7 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Detail"
         component={Detail}
-        options={{ headerBackTitle: "Back to List" }}
+        options={{ headerBackTitle: "Back to List", title: "" }}
       />
     </Stack.Navigator>
   );
@@ -66,7 +67,9 @@ export default function App() {
     <NavigationContainer>
       <StatusBar />
       <SafeAreaView style={{ flex: 1 }}>
-        <StackNavigator />
+        <GluestackUIProvider config={config}>
+          <StackNavigator />
+        </GluestackUIProvider>
       </SafeAreaView>
     </NavigationContainer>
   );

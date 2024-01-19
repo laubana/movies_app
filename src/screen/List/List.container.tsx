@@ -18,6 +18,7 @@ const List = (): JSX.Element => {
   };
   const navigation = useNavigation<NavigationContainerRef<Navigation>>();
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [option, setOption] = useState<Option | undefined>();
   const [options, setOptions] = useState<Option[]>([]);
@@ -44,9 +45,7 @@ const List = (): JSX.Element => {
     setOption(
       type === "movies"
         ? { label: "Now Play", value: "now_playing" }
-        : type === "shows"
-        ? { label: "Airing Today", value: "airing_today" }
-        : undefined
+        : { label: "Airing Today", value: "airing_today" }
     );
     setOptions(
       type === "movies"
@@ -56,20 +55,19 @@ const List = (): JSX.Element => {
             { label: "Top Rated", value: "top_rated" },
             { label: "Upcoming", value: "upcoming" },
           ]
-        : type === "shows"
-        ? [
+        : [
             { label: "Airing Today", value: "airing_today" },
             { label: "On the Air", value: "on_the_air" },
             { label: "Popular", value: "popular" },
             { label: "Top Rated", value: "top_rated" },
           ]
-        : []
     );
   }, [type]);
 
   useEffect(() => {
     const main = async () => {
       if (option?.value) {
+        setIsLoading(true);
         const response = await fetch(
           `https://api.themoviedb.org/3/${type === "movies" ? "movie" : "tv"}/${
             option.value
@@ -85,12 +83,14 @@ const List = (): JSX.Element => {
         };
 
         setItems(json.results);
+        setIsLoading(false);
       }
     };
     main();
   }, [option]);
 
   const props = {
+    isLoading,
     isVisible,
     option,
     options,
