@@ -37,18 +37,18 @@ const List = (): JSX.Element => {
     setOption(option);
   };
 
-  const handleEnter = (id: number) => {
-    navigation.navigate("Detail", { type: type, id: id });
+  const handleEnter = (item: Item) => {
+    navigation.navigate("Detail", { type: type, id: item.id });
   };
 
   useEffect(() => {
     setOption(
-      type === "movies"
+      type === "movie"
         ? { label: "Now Play", value: "now_playing" }
         : { label: "Airing Today", value: "airing_today" }
     );
     setOptions(
-      type === "movies"
+      type === "movie"
         ? [
             { label: "Now Play", value: "now_playing" },
             { label: "Popular", value: "popular" },
@@ -69,9 +69,7 @@ const List = (): JSX.Element => {
       if (option?.value) {
         setIsLoading(true);
         const response = await fetch(
-          `https://api.themoviedb.org/3/${type === "movies" ? "movie" : "tv"}/${
-            option.value
-          }`,
+          `https://api.themoviedb.org/3/${type}/${option.value}`,
 
           {
             method: "GET",

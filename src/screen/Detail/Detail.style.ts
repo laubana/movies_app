@@ -2,20 +2,25 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
     flex: 1,
-    alignItems: "center",
   },
   title: {
     fontWeight: "bold",
     fontSize: 24,
-    marginTop: 16,
-    marginBottom: 32,
+    marginVertical: 16,
   },
-  image: {
+  imageContainer: {
     width: "60%",
     aspectRatio: 1,
     marginBottom: 16,
+    backgroundColor: "lightgrey",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
   body: {
     width: "80%",

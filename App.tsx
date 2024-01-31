@@ -14,7 +14,12 @@ const Stack = createStackNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator initialRouteName="Movies">
+    <Tab.Navigator
+      screenOptions={{
+        animationEnabled: false,
+        tabBarIndicatorStyle: { backgroundColor: "teal" },
+      }}
+    >
       <Tab.Screen
         name="Movies"
         options={{
@@ -22,7 +27,7 @@ const TabNavigator = () => {
           tabBarLabelStyle: { textTransform: undefined },
         }}
         component={List}
-        initialParams={{ type: "movies" }}
+        initialParams={{ type: "movie" }}
       />
       <Tab.Screen
         name="Search"
@@ -39,7 +44,7 @@ const TabNavigator = () => {
           tabBarLabelStyle: { textTransform: undefined },
         }}
         component={List}
-        initialParams={{ type: "shows" }}
+        initialParams={{ type: "tv" }}
       />
     </Tab.Navigator>
   );
@@ -47,7 +52,7 @@ const TabNavigator = () => {
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ animationEnabled: false }}>
       <Stack.Screen
         name="Home"
         component={TabNavigator}
@@ -56,7 +61,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Detail"
         component={Detail}
-        options={{ headerBackTitle: "Back to List", title: "" }}
+        options={{
+          headerBackTitle: "Back to List",
+          title: "",
+          detachPreviousScreen: false,
+        }}
       />
     </Stack.Navigator>
   );

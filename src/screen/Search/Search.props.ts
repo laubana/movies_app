@@ -13,6 +13,6 @@ export interface SearchProps {
   handleOpen: () => void;
   handleClose: () => void;
   handleSelect: (option: Option) => void;
-  handleEnter: (id: number, type?: string) => void;
+  handleEnter: (item: Item) => void;
   handleSearch: () => void;
 }

@@ -10,5 +10,5 @@ export interface ListProps {
   handleOpen: () => void;
   handleClose: () => void;
   handleSelect: (option: Option) => void;
-  handleEnter: (id: number) => void;
+  handleEnter: (item: Item) => void;
 }

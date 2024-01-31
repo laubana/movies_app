@@ -2,12 +2,11 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
     flex: 1,
   },
-  header: {
-    paddingHorizontal: 24,
-    marginBottom: 32,
+  list: {
+    paddingHorizontal: 16,
   },
   modal: {
     backgroundColor: "white",

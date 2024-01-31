@@ -23,6 +23,7 @@ const Search = (): JSX.Element => {
   });
   const [options, setOptions] = useState<Option[]>([
     { label: "Movie", value: "movie" },
+    { label: "TV", value: "tv" },
     { label: "Multi", value: "multi" },
   ]);
   const [items, setItems] = useState<Item[]>([]);
@@ -40,10 +41,10 @@ const Search = (): JSX.Element => {
     setOption(option);
   };
 
-  const handleEnter = (id: number, type?: string) => {
+  const handleEnter = (item: Item) => {
     navigation.navigate("Detail", {
-      type: type === "movie" ? "movies" : type === "tv" ? "shows" : "movies",
-      id: id,
+      type: item.media_type,
+      id: item.id,
     });
   };
 
@@ -62,13 +63,14 @@ const Search = (): JSX.Element => {
         results: Item[];
       };
 
-      if (option.value === "movie") {
+      if (option.value === "multi") {
         setItems(json.results);
       } else {
         setItems(
-          json.results.filter(
-            (item) => item.media_type === "movie" || item.media_type === "tv"
-          )
+          json.results.map((result) => ({
+            ...result,
+            media_type: option.value,
+          }))
         );
       }
     }

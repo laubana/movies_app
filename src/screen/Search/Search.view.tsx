@@ -1,18 +1,5 @@
-import {
-  FlatList,
-  Image,
-  Pressable,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import {
-  HStack,
-  Input,
-  InputIcon,
-  InputField,
-  InputSlot,
-} from "@gluestack-ui/themed";
+import { FlatList, Pressable, Text, View } from "react-native";
+import { Input, InputIcon, InputField } from "@gluestack-ui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Modal from "react-native-modal";
 import { SearchProps } from "./Search.props";
@@ -39,7 +26,7 @@ const SearchView = (props: SearchProps) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View style={{ paddingHorizontal: 16, marginBottom: 16 }}>
         <Text>
           Search Movie/TV Show Name<Text style={{ color: "red" }}>*</Text>
         </Text>
@@ -112,6 +99,7 @@ const SearchView = (props: SearchProps) => {
               }}
             />
           )}
+          style={styles.list}
         />
       ) : (
         <Text

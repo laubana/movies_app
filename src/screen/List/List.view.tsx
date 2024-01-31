@@ -1,12 +1,10 @@
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   Pressable,
   Text,
   View,
 } from "react-native";
-import { Button } from "react-native-paper";
 import Modal from "react-native-modal";
 import { ListProps } from "./List.props";
 import styles from "./List.style";
@@ -35,7 +33,7 @@ const ListView = (props: ListProps) => {
         <Select label={option?.label} />
       </Pressable>
       {isLoading ? (
-        <ActivityIndicator size="large" color="blue" animating />
+        <ActivityIndicator size="large" color="teal" animating />
       ) : (
         <FlatList
           data={items}
@@ -52,6 +50,7 @@ const ListView = (props: ListProps) => {
               }}
             />
           )}
+          style={styles.list}
         />
       )}
       <Modal

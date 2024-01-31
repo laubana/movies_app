@@ -21,9 +21,7 @@ const Detail = (): JSX.Element => {
       if (type && id) {
         setIsLoading(true);
         const response = await fetch(
-          `https://api.themoviedb.org/3/${
-            type === "movies" ? "movie" : "tv"
-          }/${id}`,
+          `https://api.themoviedb.org/3/${type}/${id}`,
 
           {
             method: "GET",
@@ -40,9 +38,9 @@ const Detail = (): JSX.Element => {
   }, [type, id]);
 
   useLayoutEffect(() => {
-    if (item?.title || item?.name) {
+    if (item) {
       navigation.setOptions({
-        title: item?.title || item?.name,
+        title: item.title || item.name,
       });
     }
   }, [item]);
